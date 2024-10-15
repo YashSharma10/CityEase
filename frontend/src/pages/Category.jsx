@@ -68,18 +68,6 @@ const Category = () => {
         />
         <CategorySection
           imgUrl={
-            "https://img.icons8.com/?size=100&id=10662&format=png&color=000000"
-          }
-          categoryTitle={"Public Transportation"}
-          subCategoryTitle={[
-            "Bus delays or cancellations",
-            "Unclean buses or trains",
-            "Crowded public transport",
-            "Damaged or inaccessible bus stops"
-          ]}
-        />
-        <CategorySection
-          imgUrl={
             "https://img.icons8.com/?size=100&id=agokfJYrCkdX&format=png&color=000000"
           }
           categoryTitle={"Public Parks"}

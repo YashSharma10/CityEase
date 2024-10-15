@@ -1,52 +1,61 @@
 import express from "express";
 import multer from "multer";
-import { CloudinaryStorage } from "multer-storage-cloudinary";
-import cloudinary from "../utils/cloudinary.js";
 import Report from "../models/report.js";
 
 const router = express.Router();
 
-const storage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: {
-    folder: "reports",
-    allowed_formats: ["jpg", "png", "jpeg"],
+// Multer setup for handling file uploads
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/"); // Set the destination for image uploads
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + "-" + file.originalname); // Save files with unique names
   },
 });
-
 const upload = multer({ storage });
 
+// POST route to submit a report
 router.post("/submit-report", upload.single("image"), async (req, res) => {
   try {
-    const {
-      email,
-      category,
-      subCategory,
-      location,
+    const { category, location, subLocation, subCategory, pincode, description, email } = req.body;
+
+    const existingReport = await Report.findOne({
       subLocation,
-      pincode,
-      description,
-    } = req.body;
-    const image = req.file ? req.file.path : null;
+      subCategory,
+      status: "pending",
+    });
+
+    if (existingReport) {
+      existingReport.priority += 1;
+      await existingReport.save();
+      return res.status(200).json({
+        message: "Report already exists with the same details, priority increased!",
+      });
+    }
 
     const newReport = new Report({
-      email,
       category,
-      subCategory,
       location,
       subLocation,
+      subCategory,
       pincode,
       description,
-      image,
+      email,
+      image: req.file ? req.file.path : null, // Save image path if provided
     });
 
     await newReport.save();
-    res
-      .status(200)
-      .json({ message: "Report submitted successfully!", report: newReport });
+
+    return res.status(201).json({
+      message: "New report submitted successfully!",
+    });
   } catch (error) {
-    console.error("Error submitting report", error);
-    res.status(500).json({ message: "Failed to submit report", error });
+    console.error("Error in submitting report:", error);
+    res.status(500).json({
+      message: "An error occurred while submitting the report.",
+      error,
+    });
   }
 });
 
