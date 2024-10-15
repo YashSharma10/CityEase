@@ -8,7 +8,7 @@ const CategorySection = ({ imgUrl,categoryTitle }) => {
         navigate('/submit-data', { state: { message: categoryTitle } })
     }
   return (
-    <div onClick={openFormData} className="flex justify-center items-center flex-col gap-1 border rounded-md p-4 hover:bg-slate-100 hover:cursor-pointer">
+    <div onClick={openFormData} className="flex  w-64 justify-center items-center flex-col gap-1 border rounded-md p-4 hover:bg-slate-100 hover:cursor-pointer">
       <img src={imgUrl} alt="error" />
       <h2>{categoryTitle}</h2>
     </div>

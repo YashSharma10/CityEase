@@ -4,7 +4,7 @@ import { LogIn, LogOut } from "lucide-react";
 
 const Header = () => {
   return (
-    <div className="navbar bg-white p-0 border-b-1 border-black ">
+    <div className="navbar bg-white p-0 border-b-2 border-black ">
       <div className="flex-none">
         <button className="btn btn-square btn-ghost">
           <svg
@@ -27,13 +27,13 @@ const Header = () => {
       </div>
 
       {/* Search box */}
-      {/* <div className="flex-1 w-full">
+      <div className="flex">
         <input
           type="text"
           placeholder="Search"
-          className="input input-bordered w-full "
+          className="input input-bordered w-[400px] "
         />
-      </div> */}
+      </div>
       
       <div className="navbar-end">
         <button className="btn btn-ghost btn-circle">
