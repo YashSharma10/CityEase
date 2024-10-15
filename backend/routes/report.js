@@ -18,19 +18,29 @@ const upload = multer({ storage });
 // POST route to submit a report
 router.post("/submit-report", upload.single("image"), async (req, res) => {
   try {
-    const { category, location, subLocation, subCategory, pincode, description, email } = req.body;
+    const {
+      category,
+      location,
+      subLocation,
+      subCategory,
+      pincode,
+      description,
+      email,
+    } = req.body;
 
     const existingReport = await Report.findOne({
       subLocation,
       subCategory,
       status: "pending",
     });
+    console.log(existingReport);
 
     if (existingReport) {
       existingReport.priority += 1;
       await existingReport.save();
       return res.status(200).json({
-        message: "Report already exists with the same details, priority increased!",
+        message:
+          "Report already exists with the same details, priority increased!",
       });
     }
 

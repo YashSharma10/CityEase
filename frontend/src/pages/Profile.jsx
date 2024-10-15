@@ -12,7 +12,7 @@ const Profile = () => {
     const fetchUserReports = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:6005/api/user-reports/${authUser}`
+          `http://localhost:6005/profile/user-reports/${authUser}`
         );
         setUserReports(response.data);
         setLoading(false);
@@ -57,6 +57,8 @@ const Profile = () => {
               <p className="text-gray-700">Sub-Location: {report.subLocation}</p>
               <p className="text-gray-700">Sub-Category: {report.subCategory}</p>
               <p className="text-gray-700">Pincode: {report.pincode}</p>
+              <p className="text-gray-700">Status: {report.status}</p>
+              <p className="text-gray-700">Priority: {report.priority}</p>
               <p className="text-gray-700">
                 Description: {report.description}
               </p>

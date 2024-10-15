@@ -9,7 +9,7 @@ import { useAuth } from "../context/AuthProvider";
 
 export default function GoogleAuth() {
   const auth = getAuth(app);
-    const {globalUrl} = useAuth()
+  const { globalUrl } = useAuth();
   const navigate = useNavigate();
   const handleGoogleClick = async () => {
     const provider = new GoogleAuthProvider();
@@ -17,7 +17,7 @@ export default function GoogleAuth() {
     try {
       const resultsFromGoogle = await signInWithPopup(auth, provider);
       console.log(resultsFromGoogle);
-      
+
       const res = await fetch(`${globalUrl}/user/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -28,7 +28,7 @@ export default function GoogleAuth() {
         }),
       });
       console.log(res);
-      
+
       if (res.ok) {
         // dispatch(signInSuccess(data));
         localStorage.setItem(
