@@ -19,6 +19,7 @@ const upload = multer({ storage });
 router.post("/submit-report", upload.single("image"), async (req, res) => {
   try {
     const {
+      email,
       category,
       subCategory,
       location,
@@ -29,6 +30,7 @@ router.post("/submit-report", upload.single("image"), async (req, res) => {
     const image = req.file ? req.file.path : null;
 
     const newReport = new Report({
+      email,
       category,
       subCategory,
       location,

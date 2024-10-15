@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const reportSchema = new mongoose.Schema({
   category: String,
+  email: String,
   subCategory: String,
   location: String,
   pincode: Number,

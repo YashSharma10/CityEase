@@ -3,18 +3,23 @@ import Section from "../components/Section";
 import { useNavigate } from "react-router-dom";
 import Carousel from "../components/Carousel";
 import Roadmap from "../components/Roadmap";
+import { useAuth } from "../context/AuthProvider";
 
 export const Main = () => {
+  const { authUser } = useAuth();
+
   const navigate = useNavigate();
-  
+
   function openCategory() {
-    navigate("/select-category");
+    if (!authUser) {
+      console.log("login required");
+    } else navigate("/select-category");
   }
-  
+
   function openProfile() {
     navigate("/Profile");
   }
-  
+
   return (
     <main>
       {/* main image */}
@@ -29,17 +34,22 @@ export const Main = () => {
         <div className="hero-content text-neutral-content text-center">
           <div className="max-w-md">
             <h1 className="mb-5 text-5xl font-bold">
-              <span className="text-green-400">Report Today,</span> See Change Tomorrow
+              <span className="text-green-400">Report Today,</span> See Change
+              Tomorrow
             </h1>
             <p className="mb-2">
-              Report infrastructure issues, categorizes them and routes them to the appropriate department. We offer real-time tracking, improving transparency and accountability for faster resolution.
+              Report infrastructure issues, categorizes them and routes them to
+              the appropriate department. We offer real-time tracking, improving
+              transparency and accountability for faster resolution.
             </p>
           </div>
         </div>
       </div>
 
       {/* sub category with increased margin */}
-      <section className="flex w-full justify-center gap-4 my-8 mx-8"> {/* Increased margins */}
+      <section className="flex w-full justify-center gap-4 my-8 mx-8">
+        {" "}
+        {/* Increased margins */}
         <Section
           image={
             "https://img.icons8.com/?size=100&id=Mc0tQ0XMU2s_&format=png&color=000000"
@@ -63,7 +73,7 @@ export const Main = () => {
       </section>
 
       {/* Roadmap section */}
-      <Roadmap/>
+      <Roadmap />
 
       {/* about section */}
       {/* <section className="mb-3">

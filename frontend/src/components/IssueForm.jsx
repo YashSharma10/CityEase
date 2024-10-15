@@ -3,6 +3,8 @@ import axios from "axios";
 import { CiLocationOn } from "react-icons/ci";
 import { TbMapPinCode } from "react-icons/tb";
 import { BiCategory } from "react-icons/bi";
+import { useAuth } from "../context/AuthProvider";
+
 
 const sectorData = {
     "Sector 47": {
@@ -110,6 +112,8 @@ const sectorData = {
 };
 
 const IssueForm = ({ categoryTitle, subCategoryTitle }) => {
+  const { authUser } = useAuth();
+
   const initialFormState = {
     location: "",
     subLocation: "",
@@ -159,6 +163,7 @@ const IssueForm = ({ categoryTitle, subCategoryTitle }) => {
     data.append("subCategory", formData.subCategory);
     data.append("pincode", formData.pincode);
     data.append("description", formData.description);
+    data.append("email", formData.email);
     if (formData.image) {
       data.append("image", formData.image);
     }
