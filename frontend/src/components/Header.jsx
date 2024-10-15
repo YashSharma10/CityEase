@@ -1,15 +1,17 @@
 import React from "react";
+import siteLogo from "../assets/logo-color.png";
+import { LogIn, LogOut } from "lucide-react";
 
 const Header = () => {
   return (
-    <div className="navbar bg-base-200">
+    <div className="navbar bg-white p-0 border-b-1 border-black ">
       <div className="flex-none">
         <button className="btn btn-square btn-ghost">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            className="inline-block h-5 w-5 stroke-current"
+            className="inline-block h-8 w-8 stroke-current"
           >
             <path
               strokeLinecap="round"
@@ -20,9 +22,19 @@ const Header = () => {
           </svg>
         </button>
       </div>
-      <div className="flex-1">
-        <a className="btn btn-ghost text-xl">CityEase</a>
+      <div className="flex-1 ml-2">
+        <img src={siteLogo} className="w-16 h-16" />
       </div>
+
+      {/* Search box */}
+      {/* <div className="flex-1 w-full">
+        <input
+          type="text"
+          placeholder="Search"
+          className="input input-bordered w-full "
+        />
+      </div> */}
+      
       <div className="navbar-end">
         <button className="btn btn-ghost btn-circle">
           <svg
@@ -60,7 +72,15 @@ const Header = () => {
           </div>
         </button>
       </div>
-      <div className="dropdown dropdown-end">
+
+      <button
+        // onClick={login}
+        className="btn bg-green-600 hover:bg-green-700 text-white text-sm md:text-base"
+      >
+        Login
+        <LogIn className="ml-1 md:ml-2 h-4 w-4 md:h-5 md:w-5" />
+      </button>
+      {/* <div className="dropdown dropdown-end">
         <div
           tabIndex={0}
           role="button"
@@ -87,7 +107,7 @@ const Header = () => {
             <a>Logout</a>
           </li>
         </ul>
-      </div>
+      </div> */}
     </div>
   );
 };
