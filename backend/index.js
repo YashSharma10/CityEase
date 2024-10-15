@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import connectDB from "./db/connection.js";
 import reportRoutes from "./routes/report.js";
 import cors from "cors";
+import authRoutes from "./routes/user.js";
 
 dotenv.config({ path: "./.env" });
 
@@ -19,6 +20,7 @@ app.use(
 
 // Routes
 app.use("/api", reportRoutes);
+app.use("/user", authRoutes);
 
 connectDB()
   .then(() => {

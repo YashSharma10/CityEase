@@ -1,19 +1,25 @@
 import React from "react";
 import Section from "../components/Section";
 import { useNavigate } from "react-router-dom";
-import Carousel from "../components/Carousel"
+import Carousel from "../components/Carousel";
 import Roadmap from "../components/Roadmap";
 
 export const Main = () => {
   const navigate = useNavigate();
+  
   function openCategory() {
-    navigate("/select-category")
+    navigate("/select-category");
   }
+  
+  function openProfile() {
+    navigate("/Profile");
+  }
+  
   return (
     <main>
       {/* main image */}
       <div
-        className="hero min-h-screen"
+        className="hero h-96" // Adjust the height as needed
         style={{
           backgroundImage:
             "url(https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp)",
@@ -22,22 +28,23 @@ export const Main = () => {
         <div className="hero-overlay bg-opacity-60"></div>
         <div className="hero-content text-neutral-content text-center">
           <div className="max-w-md">
-            <h1 className="mb-5 text-5xl font-bold"><span className="text-green-400">Report Today,</span> See Change Tomorrow</h1>
-            <p className="mb-5">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Error sunt vel cumque ab veniam ullam dicta porro. Ex, iste corporis.
+            <h1 className="mb-5 text-5xl font-bold">
+              <span className="text-green-400">Report Today,</span> See Change Tomorrow
+            </h1>
+            <p className="mb-2">
+              Report infrastructure issues, categorizes them and routes them to the appropriate department. We offer real-time tracking, improving transparency and accountability for faster resolution.
             </p>
-            {/* <button className="btn btn-primary">Get Started</button> */}
           </div>
         </div>
       </div>
 
-      {/*sub category  */}
-      <section className="flex w-full justify-center gap-2 my-2 ">
+      {/* sub category with increased margin */}
+      <section className="flex w-full justify-center gap-4 my-8 mx-8"> {/* Increased margins */}
         <Section
           image={
             "https://img.icons8.com/?size=100&id=Mc0tQ0XMU2s_&format=png&color=000000"
           }
-          text={"Report a Issue"}
+          text={"Report an Issue"}
           openScreen={openCategory}
         />
         <Section
@@ -45,6 +52,7 @@ export const Main = () => {
             "https://img.icons8.com/?size=100&id=24875&format=png&color=000000"
           }
           text={"Track Progress"}
+          openScreen={openProfile}
         />
         <Section
           image={

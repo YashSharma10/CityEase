@@ -1,12 +1,11 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose"; // Import mongoose using ES6 syntax
 
 const userSchema = new mongoose.Schema({
-  email : String,
-  role : {
-    type : String,
-    enum: ["citizen", "worker", "admin"],
-  },
-  image: String,
+  name: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  googlePhotoUrl: { type: String, required: true },
+  // Add other fields as necessary
 });
 
-export default mongoose.model("user", userSchemaSchema);
+const User = mongoose.model("User", userSchema);
+export default User; // Export the User model

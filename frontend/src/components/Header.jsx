@@ -53,6 +53,8 @@ const Header = () => {
             />
           </svg>
         </button>
+        
+        <Link to={"/about"} className="px-4">About Us</Link>
         {/* badge */}
         {/* <button className="btn btn-ghost btn-circle">
           <div className="indicator">

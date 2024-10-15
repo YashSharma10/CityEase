@@ -1,11 +1,10 @@
-
 const AboutUs = () => {
   return (
     <section className="bg-gray-100 py-12 px-6">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-4xl font-bold text-center text-gray-800 mb-6">About Us</h1>
         <p className="text-lg text-gray-700 leading-7 text-center mb-12">
-          At <span className="font-bold text-blue-600">CityEase</span>, we believe in harnessing the power of community-driven action to create better urban spaces.
+          At <span className="font-bold text-green-400">CityEase</span>, we believe in harnessing the power of community-driven action to create better urban spaces.
           Our platform empowers citizens to take control of their surroundings by reporting city issues like broken streetlights, potholes, water leaks, and more.
           With CityEase, residents can actively participate in improving their neighborhoods, making our cities smarter, safer, and more efficient.
         </p>
@@ -21,25 +20,37 @@ const AboutUs = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="bg-white p-6 shadow-lg rounded-lg">
-            <h3 className="text-2xl font-bold text-blue-600 mb-2">Quick & Easy Reporting</h3>
+            <h3 className="text-2xl font-bold text-green-400 mb-2">Quick & Easy Reporting</h3>
             <p className="text-gray-700">
               Submit issues with geolocation and media uploads.
             </p>
           </div>
           <div className="bg-white p-6 shadow-lg rounded-lg">
-            <h3 className="text-2xl font-bold text-blue-600 mb-2">Real-time Status Tracking</h3>
+            <h3 className="text-2xl font-bold text-green-400 mb-2">Real-time Status Tracking</h3>
             <p className="text-gray-700">
               Receive notifications and updates on your report’s progress.
             </p>
           </div>
           <div className="bg-white p-6 shadow-lg rounded-lg">
-            <h3 className="text-2xl font-bold text-blue-600 mb-2">Efficient Communication</h3>
+            <h3 className="text-2xl font-bold text-green-400 mb-2">Priority Resolution to Problems</h3>
+            <p className="text-gray-700">
+              Priority increases on the number of reports and delayed time.
+            </p>
+          </div>
+          <div className="bg-white p-6 shadow-lg rounded-lg">
+            <h3 className="text-2xl font-bold text-green-400 mb-2">Smart Categorization and Routing to Specific Authority</h3>
+            <p className="text-gray-700">
+              Select Category and the problem will be forwarded to specific Authority for resolution.
+            </p>
+          </div>
+          <div className="bg-white p-6 shadow-lg rounded-lg">
+            <h3 className="text-2xl font-bold text-green-400 mb-2">Efficient Communication</h3>
             <p className="text-gray-700">
               Municipal workers and citizens can collaborate to resolve problems faster.
             </p>
           </div>
           <div className="bg-white p-6 shadow-lg rounded-lg">
-            <h3 className="text-2xl font-bold text-blue-600 mb-2">Data-Driven Insights</h3>
+            <h3 className="text-2xl font-bold text-green-400 mb-2">Data-Driven Insights</h3>
             <p className="text-gray-700">
               City authorities can access analytics to improve resource allocation and respond to recurring issues.
             </p>
