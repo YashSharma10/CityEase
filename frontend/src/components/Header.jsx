@@ -3,11 +3,22 @@ import siteLogo from "../assets/logo-color.png";
 import { LogIn, LogOut } from "lucide-react";
 import { Link } from "react-router-dom";
 import GoogleAuth from "./GoogleAuth";
+import { useAuth } from "../context/AuthProvider";
+import FilterModal from "./filterModal";
 
 const Header = () => {
+  const { authUser, setAuthUser } = useAuth();
+  console.log(authUser);
+  function userLogout() {
+    setAuthUser(null);
+    localStorage.removeItem("User");
+    window.location.reload();
+  }
+  function openProfile() {}
   return (
-    <div className="navbar bg-white p-0 border-b-1 border-black shadow-xl ">
-      <div className="flex-none">
+    <div className="navbar p-0 shadow-xl bg-white/30 backdrop-blur-md border-b border-white/10">
+      {/* Mobile Menu */}
+      <div className="flex-none lg:hidden">
         <button className="btn btn-square btn-ghost">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -24,95 +35,74 @@ const Header = () => {
           </svg>
         </button>
       </div>
-      <Link to={"/"} className="flex-1 ml-2" >
-        <img src={siteLogo} className="w-16 h-16" />
+
+      {/* Logo */}
+      <Link to="/" className="flex-1 ml-2">
+        <img
+          src={siteLogo}
+          className="w-12 h-12 lg:w-16 lg:h-16"
+          alt="Site Logo"
+        />
       </Link>
 
-      <div className="navbar-end">
+      {/* Search and Nav Items */}
+      <div className="hidden lg:flex lg:justify-end">
         {/* Search box */}
-        <div className="">
+        <div className="mr-4 hidden md:flex">
           <input
             type="text"
             placeholder="Search"
-            className="input input-bordered w-[400px] "
+            className="input input-bordered w-full lg:w-[300px] xl:w-[400px] border border-green-400 bg-white/20 backdrop-blur-sm text-black placeholder-gray-500"
           />
         </div>
-        <button className="btn btn-ghost btn-circle">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            />
-          </svg>
-        </button>
-        
-        <Link to={"/about"} className="px-4">About Us</Link>
-        {/* badge */}
-        {/* <button className="btn btn-ghost btn-circle">
-          <div className="indicator">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-              />
-            </svg>
-            <span className="badge badge-xs badge-primary indicator-item"></span>
-          </div>
-        </button> */}
+        <Link to="/about" className="px-2 hidden lg:inline-block hover:underline decoration-green-400">
+          About Us
+        </Link>
+        <Link to="/contact" className="px-2 hidden lg:inline-block hover:underline decoration-green-400">
+          Contact Us
+        </Link>
       </div>
 
-      <button
-        onClick={()=>document.getElementById('googleModal').showModal()}
-        className="btn bg-green-600 hover:bg-green-700 text-white text-sm md:text-base"
-      >
-        Login
-        <LogIn className="ml-1 md:ml-2 h-4 w-4 md:h-5 md:w-5" />
-      </button>
-      {/* <div className="dropdown dropdown-end">
-        <div
-          tabIndex={0}
-          role="button"
-          className="btn btn-ghost btn-circle avatar"
+      {/* Login Button */}
+      {!authUser ? (
+        <button
+          onClick={() => document.getElementById("googleModal").showModal()}
+          className="btn bg-green-600 hover:bg-green-700 text-white text-sm md:text-base"
         >
-          <div className="w-10 rounded-full">
-            <img
-              alt="Tailwind CSS Navbar component"
-              src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-            />
+          Login
+          <LogIn className="ml-1 md:ml-2 h-4 w-4 md:h-5 md:w-5" />
+        </button>
+      ) : (
+        <div className="dropdown">
+          <div tabIndex={0} role="button" className="btn m-1">
+            {authUser}
+            <LogOut className="ml-1 md:ml-2 h-4 w-4 md:h-5 md:w-5" />
           </div>
+          <ul
+            tabIndex={0}
+            className="dropdown-content menu bg-base-100 rounded-md z-[1] w-52 p-2 shadow"
+          >
+            <li>
+              <button
+                onClick={() =>
+                  document.getElementById("confirmModal").showModal()
+                }
+              >
+                Logout
+              </button>
+            </li>
+            <li>
+              <button onClick={openProfile}>Profile</button>
+            </li>
+          </ul>
         </div>
-        <ul
-          tabIndex={0}
-          className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-        >
-          <li>
-            <a>Profile</a>
-          </li>
-          <li>
-            <a>Settings</a>
-          </li>
-          <li>
-            <a>Logout</a>
-          </li>
-        </ul>
-      </div> */}
-      <GoogleAuth/>
+      )}
+      <GoogleAuth />
+      <FilterModal
+        handleConfirm={userLogout}
+        header={"Logout"}
+        message={"You are about to logout"}
+      />
     </div>
   );
 };

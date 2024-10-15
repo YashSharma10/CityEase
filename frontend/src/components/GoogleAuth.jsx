@@ -27,7 +27,8 @@ export default function GoogleAuth() {
           googlePhotoUrl: resultsFromGoogle.user.photoURL,
         }),
       });
-
+      console.log(res);
+      
       if (res.ok) {
         // dispatch(signInSuccess(data));
         localStorage.setItem(
