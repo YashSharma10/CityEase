@@ -7,6 +7,7 @@ import { FormData } from "./pages/FormData";
 import AboutUs from "./pages/AboutUs";
 // import Login from "./pages/Login";
 import GoogleAuth from "./components/GoogleAuth";
+import ContactUs from "./pages/ContactUs";
 
 const App = () => {
   return (
@@ -18,6 +19,8 @@ const App = () => {
         <Route element={<FormData />} path="/submit-data" />
         <Route element={<AboutUs />} path="/about" />
         <Route element={<GoogleAuth/>} path="/login" />
+        <Route element={<AboutUs/>} path="/about" />
+        <Route element={<ContactUs/>} path="/contact" />
       </Routes>
       <Footer />
     </BrowserRouter>

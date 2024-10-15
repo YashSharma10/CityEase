@@ -2,6 +2,7 @@ import React from "react";
 import Section from "../components/Section";
 import { useNavigate } from "react-router-dom";
 import Carousel from "../components/Carousel"
+import Roadmap from "../components/Roadmap";
 
 export const Main = () => {
   const navigate = useNavigate();
@@ -31,10 +32,10 @@ export const Main = () => {
       </div>
 
       {/*sub category  */}
-      <section className="flex w-full justify-center gap-2 my-2">
+      <section className="flex w-full justify-center gap-2 my-2 ">
         <Section
           image={
-            "https://img.icons8.com/?size=100&id=11691&format=png&color=000000"
+            "https://img.icons8.com/?size=100&id=Mc0tQ0XMU2s_&format=png&color=000000"
           }
           text={"Report a Issue"}
           openScreen={openCategory}
@@ -53,8 +54,11 @@ export const Main = () => {
         />
       </section>
 
+      {/* Roadmap section */}
+      <Roadmap/>
+
       {/* about section */}
-      <section className="mb-3">
+      {/* <section className="mb-3">
         <div className="text-center p-3">
           <h1 className="text-3xl">About CityEase</h1>
         </div>
@@ -69,7 +73,7 @@ export const Main = () => {
             Empowering you to shape a better city
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* carousel */}
       {/* <Carousel/> */}

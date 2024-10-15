@@ -1,112 +1,58 @@
 
 const AboutUs = () => {
   return (
-    <div className="bg-gray-100 min-h-screen flex flex-col items-center justify-center p-8">
-      <div className="bg-white rounded-lg shadow-lg p-8 max-w-4xl w-full">
-        {/* Heading */}
-        <h1 className="text-4xl font-bold text-center text-gray-800 mb-6">
-          About Us: Building Sustainable Cities
-        </h1>
-
-        {/* Image */}
-        <div className="flex justify-center mb-6">
-          <img
-            src="https://via.placeholder.com/400"
-            alt="Sustainable Cities"
-            className="rounded-full w-40 h-40 object-cover"
-          />
-        </div>
-
-        {/* Company Description */}
-        <p className="text-gray-700 text-lg leading-relaxed mb-6">
-          Our mission is to build sustainable cities that meet the needs of both the environment
-          and the people living in them. By focusing on renewable energy, efficient public 
-          transportation, and green infrastructure, we aim to create urban spaces that are 
-          resilient, inclusive, and environmentally friendly.
+    <section className="bg-gray-100 py-12 px-6">
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-4xl font-bold text-center text-gray-800 mb-6">About Us</h1>
+        <p className="text-lg text-gray-700 leading-7 text-center mb-12">
+          At <span className="font-bold text-blue-600">CityEase</span>, we believe in harnessing the power of community-driven action to create better urban spaces.
+          Our platform empowers citizens to take control of their surroundings by reporting city issues like broken streetlights, potholes, water leaks, and more.
+          With CityEase, residents can actively participate in improving their neighborhoods, making our cities smarter, safer, and more efficient.
         </p>
 
-        {/* Case Studies of Sustainable Cities */}
-        <div className="space-y-8">
-          {/* City: Copenhagen */}
-          <div className="space-y-4">
-            <div className="flex items-center">
-              <div className="w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center mr-4">
-                <i className="fas fa-city"></i>
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold text-gray-800">Copenhagen, Denmark</h3>
-                <p className="text-gray-600">
-                  Copenhagen is a world leader in sustainability with a goal to become carbon-neutral
-                  by 2025. The city has reduced its CO<sub>2</sub> emissions by more than 40% 
-                  since 1995 through clean energy initiatives, bike infrastructure, and energy-efficient buildings.
-                </p>
-              </div>
-            </div>
-          </div>
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-semibold text-gray-800 mb-4">Our Mission</h2>
+          <p className="text-lg text-gray-700 leading-7">
+            Our mission is simple: to build a transparent, accessible system where anyone can report city infrastructure problems, track their progress,
+            and stay updated in real-time. By providing a direct communication channel between citizens and local authorities, 
+            CityEase ensures that every issue is addressed and resolved efficiently.
+          </p>
+        </div>
 
-          {/* City: Singapore */}
-          <div className="space-y-4">
-            <div className="flex items-center">
-              <div className="w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center mr-4">
-                <i className="fas fa-tree"></i>
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold text-gray-800">Singapore</h3>
-                <p className="text-gray-600">
-                  Singapore has pioneered the concept of the "garden city" by incorporating 
-                  green spaces into urban planning. Its "zero waste" strategy and vertical gardens 
-                  have made the city more livable while addressing waste management challenges.
-                </p>
-              </div>
-            </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="bg-white p-6 shadow-lg rounded-lg">
+            <h3 className="text-2xl font-bold text-blue-600 mb-2">Quick & Easy Reporting</h3>
+            <p className="text-gray-700">
+              Submit issues with geolocation and media uploads.
+            </p>
           </div>
-
-          {/* City: Curitiba */}
-          <div className="space-y-4">
-            <div className="flex items-center">
-              <div className="w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center mr-4">
-                <i className="fas fa-bus-alt"></i>
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold text-gray-800">Curitiba, Brazil</h3>
-                <p className="text-gray-600">
-                  Curitiba is known for its innovative public transportation system, including 
-                  the Bus Rapid Transit (BRT) system. This has drastically reduced traffic congestion 
-                  and air pollution, making it a model for sustainable urban mobility worldwide.
-                </p>
-              </div>
-            </div>
+          <div className="bg-white p-6 shadow-lg rounded-lg">
+            <h3 className="text-2xl font-bold text-blue-600 mb-2">Real-time Status Tracking</h3>
+            <p className="text-gray-700">
+              Receive notifications and updates on your report’s progress.
+            </p>
           </div>
-
-          {/* City: Vancouver */}
-          <div className="space-y-4">
-            <div className="flex items-center">
-              <div className="w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center mr-4">
-                <i className="fas fa-leaf"></i>
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold text-gray-800">Vancouver, Canada</h3>
-                <p className="text-gray-600">
-                  Vancouver is one of the greenest cities in the world, with a focus on 
-                  renewable energy, sustainable building design, and waste management. 
-                  The city aims to run on 100% renewable energy by 2050.
-                </p>
-              </div>
-            </div>
+          <div className="bg-white p-6 shadow-lg rounded-lg">
+            <h3 className="text-2xl font-bold text-blue-600 mb-2">Efficient Communication</h3>
+            <p className="text-gray-700">
+              Municipal workers and citizens can collaborate to resolve problems faster.
+            </p>
+          </div>
+          <div className="bg-white p-6 shadow-lg rounded-lg">
+            <h3 className="text-2xl font-bold text-blue-600 mb-2">Data-Driven Insights</h3>
+            <p className="text-gray-700">
+              City authorities can access analytics to improve resource allocation and respond to recurring issues.
+            </p>
           </div>
         </div>
 
-        {/* Footer with Vision */}
-        <div className="mt-8 text-center">
-          <h3 className="text-2xl font-bold text-gray-800">Our Vision for the Future</h3>
-          <p className="text-gray-600 mt-4">
-            We envision cities that are not only environmentally sustainable but also promote 
-            social equity and economic prosperity. By leveraging technology and innovation, 
-            we are solving urban challenges to create a better future for all.
+        <div className="text-center mt-12">
+          <p className="text-lg text-gray-700 leading-7">
+            Together, we can build cleaner, safer, and more vibrant urban communities—one report at a time.
           </p>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

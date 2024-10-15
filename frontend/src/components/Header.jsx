@@ -6,7 +6,7 @@ import GoogleAuth from "./GoogleAuth";
 
 const Header = () => {
   return (
-    <div className="navbar bg-white p-0 border-b-2 border-black ">
+    <div className="navbar bg-white p-0 border-b-1 border-black shadow-xl ">
       <div className="flex-none">
         <button className="btn btn-square btn-ghost">
           <svg

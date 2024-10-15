@@ -5,16 +5,19 @@ import { useNavigate } from "react-router-dom";
 import siteLogo from "../assets/logo-color.png";
 
 // import { useAuth } from "../context/AuthProvider";
+import { useAuth } from "../context/AuthProvider";
 
 export default function GoogleAuth() {
   const auth = getAuth(app);
-  //   const {globalUrl} = useAuth()
+    const {globalUrl} = useAuth()
   const navigate = useNavigate();
   const handleGoogleClick = async () => {
     const provider = new GoogleAuthProvider();
     provider.setCustomParameters({ prompt: "select_account" });
     try {
       const resultsFromGoogle = await signInWithPopup(auth, provider);
+      console.log(resultsFromGoogle);
+      
       const res = await fetch(`${globalUrl}/user/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -24,7 +27,6 @@ export default function GoogleAuth() {
           googlePhotoUrl: resultsFromGoogle.user.photoURL,
         }),
       });
-      //   const data = await res.json();
 
       if (res.ok) {
         // dispatch(signInSuccess(data));
@@ -45,20 +47,20 @@ export default function GoogleAuth() {
     <dialog id="googleModal" className="modal">
       <div className="modal-box">
         <form method="dialog">
-          <img src={siteLogo} alt="error" className="w-20 mb-7" />
+          <img src={siteLogo} alt="error" className="w-20" />
           <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
             ✕
           </button>
         </form>
-        <h3 className="font-bold text-lg">
-          Report Today, See Change Tomorrow{" "}
+        <h3 className="font-bold text-lg mb-2">
+          Report Today, See Change Tomorrow
         </h3>
-        <p className="py-4">
-          Log in to *CityEase* to report issues, track progress, and receive
+        <p className="mb-1">
+          Log in to CityEase to report issues, track progress, and receive
           real-time updates for faster problem resolutions.
         </p>
         <button
-          className="flex w-full bg-gray-100 px-4 py-2 mt-10 rounded-md gap-2 middle cursor-pointer"
+          className="flex w-full bg-gray-100 px-4 py-2 mt-10 rounded-md gap-2 justify-center items-center cursor-pointer hover:bg-slate-200"
           onClick={handleGoogleClick}
         >
           <img

@@ -1,16 +1,29 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import { gsap } from "gsap";
 
-const Section = ({ image, text ,openScreen}) => {
+const Section = ({ image, text, openScreen }) => {
+  const cardRef = useRef(null);
+
+  useEffect(() => {
+    // GSAP animation for the card
+    gsap.fromTo(
+      cardRef.current,
+      { opacity: 0, scale: 0.8, y: 50 }, // Starting state
+      { opacity: 1, scale: 1, y: 0, duration: 1, ease: "power3.out" } // Final state
+    );
+  }, []);
+
   return (
-    <div className="card w-96 shadow-sm bg-base-200">
-      <figure className="px-10 pt-10">
-        <img src={image} alt="Shoes" className="rounded-xl" />
+    <div
+      ref={cardRef}
+      className="flex flex-col items-center w-72 p-1 shadow-lg bg-white bg-opacity-10 backdrop-blur-lg border border-white/30 rounded-xl"
+    >
+      <figure className="px-2 pt-2">
+        <img src={image} alt="Section Image" className="rounded-xl" />
       </figure>
       <div className="card-body items-center text-center">
-        {/* <h2 className="card-title">Shoes!</h2> */}
-        {/* <p>If a dog chews shoes whose shoes does he choose?</p> */}
         <div className="card-actions">
-          <button className="btn btn-primary" onClick={openScreen} >
+          <button className="btn bg-green-400 text-white" onClick={openScreen}>
             {text}
           </button>
         </div>
