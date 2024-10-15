@@ -1,6 +1,8 @@
 import React from "react";
 import siteLogo from "../assets/logo-color.png";
 import { LogIn, LogOut } from "lucide-react";
+import { Link } from "react-router-dom";
+import GoogleAuth from "./GoogleAuth";
 
 const Header = () => {
   return (
@@ -22,20 +24,19 @@ const Header = () => {
           </svg>
         </button>
       </div>
-      <div className="flex-1 ml-2">
+      <Link to={"/"} className="flex-1 ml-2" >
         <img src={siteLogo} className="w-16 h-16" />
-      </div>
+      </Link>
 
-      {/* Search box */}
-      <div className="flex">
-        <input
-          type="text"
-          placeholder="Search"
-          className="input input-bordered w-[400px] "
-        />
-      </div>
-      
       <div className="navbar-end">
+        {/* Search box */}
+        <div className="">
+          <input
+            type="text"
+            placeholder="Search"
+            className="input input-bordered w-[400px] "
+          />
+        </div>
         <button className="btn btn-ghost btn-circle">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -52,7 +53,8 @@ const Header = () => {
             />
           </svg>
         </button>
-        <button className="btn btn-ghost btn-circle">
+        {/* badge */}
+        {/* <button className="btn btn-ghost btn-circle">
           <div className="indicator">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -70,11 +72,11 @@ const Header = () => {
             </svg>
             <span className="badge badge-xs badge-primary indicator-item"></span>
           </div>
-        </button>
+        </button> */}
       </div>
 
       <button
-        // onClick={login}
+        onClick={()=>document.getElementById('googleModal').showModal()}
         className="btn bg-green-600 hover:bg-green-700 text-white text-sm md:text-base"
       >
         Login
@@ -108,6 +110,7 @@ const Header = () => {
           </li>
         </ul>
       </div> */}
+      <GoogleAuth/>
     </div>
   );
 };

@@ -5,7 +5,8 @@ import { Main } from "./pages/Main";
 import Category from "./pages/Category";
 import { FormData } from "./pages/FormData";
 import AboutUs from "./pages/AboutUs";
-import Login from "./pages/Login";
+// import Login from "./pages/Login";
+import GoogleAuth from "./components/GoogleAuth";
 
 const App = () => {
   return (
@@ -16,7 +17,7 @@ const App = () => {
         <Route element={<Category />} path="/select-category" />
         <Route element={<FormData />} path="/submit-data" />
         <Route element={<AboutUs />} path="/about" />
-        <Route element={<Login />} path="/login" />
+        <Route element={<GoogleAuth/>} path="/login" />
       </Routes>
       <Footer />
     </BrowserRouter>

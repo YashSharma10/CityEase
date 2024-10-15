@@ -10,24 +10,6 @@ const Category = () => {
       <div className="flex justify-center gap-4 p-3 flex-wrap ">
         <CategorySection
           imgUrl={
-            "https://img.icons8.com/?size=100&id=1946&format=png&color=000000"
-          }
-          categoryTitle={"Water"}
-        />
-        <CategorySection
-          imgUrl={
-            "https://img.icons8.com/?size=100&id=347&format=png&color=000000"
-          }
-          categoryTitle={"Road"}
-        />
-        <CategorySection
-          imgUrl={
-            "https://img.icons8.com/?size=100&id=1948&format=png&color=000000"
-          }
-          categoryTitle={"Electricity"}
-        />
-        <CategorySection
-          imgUrl={
             "https://img.icons8.com/?size=100&id=2deo7hNfn3l0&format=png&color=000000"
           }
           categoryTitle={"Street Light"}
@@ -55,6 +37,54 @@ const Category = () => {
             "https://img.icons8.com/?size=100&id=K3f3XWd7mLpe&format=png&color=000000"
           }
           categoryTitle={"Water Supply & Drainage"}
+        />
+        <CategorySection
+          imgUrl={
+            "https://img.icons8.com/?size=100&id=10662&format=png&color=000000"
+          }
+          categoryTitle={"Public Transportation"}
+        />{" "}
+        <CategorySection
+          imgUrl={
+            "https://img.icons8.com/?size=100&id=agokfJYrCkdX&format=png&color=000000"
+          }
+          categoryTitle={"Public Parks"}
+        />{" "}
+        <CategorySection
+          imgUrl={
+            "https://img.icons8.com/?size=100&id=XAcRRlNdqGIn&format=png&color=000000"
+          }
+          categoryTitle={"Electricity & Power Outages"}
+        />{" "}
+        <CategorySection
+          imgUrl={
+            "https://img.icons8.com/?size=100&id=4539&format=png&color=000000"
+          }
+          categoryTitle={"Animal Control"}
+        />{" "}
+        <CategorySection
+          imgUrl={
+            "https://img.icons8.com/?size=100&id=mnPkwNOXSIqA&format=png&color=000000"
+          }
+          categoryTitle={"Public Toilets & Sanitation"}
+        />{" "}
+        <CategorySection
+          imgUrl={
+            "https://img.icons8.com/?size=100&id=7BhOj261T8ZA&format=png&color=000000"
+          }
+          categoryTitle={"Parking Violations"}
+        />{" "}
+        <CategorySection
+          imgUrl={
+            "https://img.icons8.com/?size=100&id=54gBpMx6Fs4V&format=png&color=000000"
+          }
+          categoryTitle={"Flooding & Waterlogging"}
+        />{" "}
+        <CategorySection
+          imgUrl={
+            "https://img.icons8.com/?size=100&id=33951&format=png&color=000000"
+          }
+          categoryTitle={"Other"}
         />
       </div>
     </div>
