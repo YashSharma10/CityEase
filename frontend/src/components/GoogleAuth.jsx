@@ -37,7 +37,11 @@ export default function GoogleAuth() {
         // Conditional redirect based on email
         if (email === "testworkers001@gmail.com") {
           navigate("/Worker"); // Redirect to workers page
-        } else {
+        } 
+        else if(email === "testworkers002@gmail.com"){
+          navigate("/Worker2");
+        }
+        else {
           // For other users, reload or navigate to the main page
           window.location.reload();
         }

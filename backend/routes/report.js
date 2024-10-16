@@ -1,16 +1,16 @@
 import express from "express";
 import multer from "multer";
+import { CloudinaryStorage } from "multer-storage-cloudinary";
+import cloudinary from "../utils/cloudinary.js";
 import Report from "../models/report.js";
 
 const router = express.Router();
 
-// Multer setup for handling file uploads
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads/"); // Set the destination for image uploads
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + "-" + file.originalname); // Save files with unique names
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "reports",
+    allowed_formats: ["jpg", "png", "jpeg"],
   },
 });
 const upload = multer({ storage });
