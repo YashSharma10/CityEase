@@ -5,6 +5,7 @@ import reportRoutes from "./routes/report.js";
 import cors from "cors";
 import authRoutes from "./routes/user.js";
 import profileRoute from "./routes/profile.js"
+import workerRoute from "./routes/worker.js";
 
 dotenv.config({ path: "./.env" });
 
@@ -22,7 +23,8 @@ app.use(
 // Routes
 app.use("/api", reportRoutes);
 app.use("/user", authRoutes);
-app.use("/profile", profileRoute)
+app.use("/profile", profileRoute);
+app.use("/profile", workerRoute);
 
 connectDB()
   .then(() => {

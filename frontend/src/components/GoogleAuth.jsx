@@ -1,49 +1,54 @@
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-// import { AiFillGoogleCircle } from "react-icons/ai";
 import { app } from "../utils/firebaseConfig";
 import { useNavigate } from "react-router-dom";
 import siteLogo from "../assets/logo-color.png";
-
-// import { useAuth } from "../context/AuthProvider";
 import { useAuth } from "../context/AuthProvider";
 
 export default function GoogleAuth() {
   const auth = getAuth(app);
   const { globalUrl } = useAuth();
   const navigate = useNavigate();
+
   const handleGoogleClick = async () => {
     const provider = new GoogleAuthProvider();
     provider.setCustomParameters({ prompt: "select_account" });
     try {
       const resultsFromGoogle = await signInWithPopup(auth, provider);
+      const { email, displayName, photoURL } = resultsFromGoogle.user;
+
       console.log(resultsFromGoogle);
 
+      // Post user data to the backend
       const res = await fetch(`${globalUrl}/user/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: resultsFromGoogle.user.displayName,
-          email: resultsFromGoogle.user.email,
-          googlePhotoUrl: resultsFromGoogle.user.photoURL,
+          name: displayName,
+          email: email,
+          googlePhotoUrl: photoURL,
         }),
       });
       console.log(res);
 
       if (res.ok) {
-        // dispatch(signInSuccess(data));
-        localStorage.setItem(
-          "User",
-          JSON.stringify(resultsFromGoogle.user.email)
-        );
-        // console.log("message", resultsFromGoogle.user.email);
-        // navigate("/");
-        window.location.reload();
+        // Store user email in localStorage
+        localStorage.setItem("User", JSON.stringify(email));
+
+        // Conditional redirect based on email
+        if (email === "testworkers001@gmail.com") {
+          navigate("/Worker"); // Redirect to workers page
+        } else {
+          // For other users, reload or navigate to the main page
+          window.location.reload();
+        }
+
         document.getElementById("googleModal").close();
       }
     } catch (error) {
       console.log(error);
     }
   };
+
   return (
     <dialog id="googleModal" className="modal">
       <div className="modal-box">
@@ -67,7 +72,7 @@ export default function GoogleAuth() {
           <img
             width={20}
             src="https://lh3.googleusercontent.com/COxitqgJr1sJnIDe8-jiKhxDx1FrYbtRHKJ9z_hELisAlapwE9LUPh6fcXIfb5vwpbMl4xl9H9TRFPc5NOO8Sb3VSgIBrfRYvW6cUA"
-            alt=""
+            alt="Google Icon"
           />
           <span> Sign in with Google</span>
         </button>

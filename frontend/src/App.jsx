@@ -9,6 +9,7 @@ import AboutUs from "./pages/AboutUs";
 import GoogleAuth from "./components/GoogleAuth";
 import ContactUs from "./pages/ContactUs";
 import Profile from "./pages/Profile";
+import Worker from "./pages/Worker";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
         <Route element={<AboutUs/>} path="/about" />
         <Route element={<ContactUs/>} path="/contact" />
         <Route element={<Profile/>} path="/profile" />
+        <Route element={<Worker/>} path="/worker" />
       </Routes>
       <Footer />
     </BrowserRouter>
