@@ -69,4 +69,28 @@ router.post("/submit-report", upload.single("image"), async (req, res) => {
   }
 });
 
+
+router.put("/reports/:id/status", async (req, res) => {
+  try {
+    const reportId = req.params.id;
+    const { status } = req.body;
+
+    const updatedReport = await Report.findByIdAndUpdate(
+      reportId,
+      { status },
+      { new: true }
+    );
+
+    if (!updatedReport) {
+      return res.status(404).json({ message: "Report not found" });
+    }
+
+    res.status(200).json({ message: "Report status updated successfully", updatedReport });
+  } catch (error) {
+    console.error("Error updating report status:", error);
+    res.status(500).json({ message: "An error occurred while updating the report status." });
+  }
+});
+
+
 export default router;
