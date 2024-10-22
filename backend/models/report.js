@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
+import { v4 as uuidv4 } from "uuid";
 
 const reportSchema = new mongoose.Schema({
+  reportId: { type: String, default: uuidv4 },
   category: String,
   email: String,
   subCategory: String,

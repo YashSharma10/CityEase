@@ -1,10 +1,9 @@
-import React from "react";
 import siteLogo from "../assets/logo-color-transparent.png";
 import { LogIn, LogOut } from "lucide-react";
 import { Link } from "react-router-dom";
 import GoogleAuth from "./GoogleAuth";
 import { useAuth } from "../context/AuthProvider";
-import FilterModal from "./filterModal";
+import FilterModal from "./FilterModal";
 
 const Header = () => {
   const { authUser, setAuthUser } = useAuth();
