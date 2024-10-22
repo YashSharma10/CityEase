@@ -35,3 +35,4 @@ connectDB()
   .catch((err) => {
     console.error("MongoDB connection failed!!!", err);
   });
+console.log("hello");
