@@ -1,5 +1,5 @@
 import React from "react";
-import siteLogo from "../assets/logo-color.png";
+import siteLogo from "../assets/logo-color-transparent.png";
 import { LogIn, LogOut } from "lucide-react";
 import { Link } from "react-router-dom";
 import GoogleAuth from "./GoogleAuth";
@@ -8,15 +8,17 @@ import FilterModal from "./filterModal";
 
 const Header = () => {
   const { authUser, setAuthUser } = useAuth();
-  console.log(authUser);
+
   function userLogout() {
     setAuthUser(null);
     localStorage.removeItem("User");
     window.location.reload();
   }
+
   function openProfile() {}
+
   return (
-    <div className="navbar p-0 shadow-xl bg-white/30 backdrop-blur-md border-b border-white/10">
+    <div className="navbar p-4 shadow-md bg-black text-white border-b border-gray-800">
       {/* Mobile Menu */}
       <div className="flex-none lg:hidden">
         <button className="btn btn-square btn-ghost">
@@ -46,19 +48,19 @@ const Header = () => {
       </Link>
 
       {/* Search and Nav Items */}
-      <div className="hidden lg:flex lg:justify-end">
+      <div className="hidden lg:flex lg:justify-end items-center">
         {/* Search box */}
         <div className="mr-4 hidden md:flex">
           <input
             type="text"
             placeholder="Search"
-            className="input input-bordered w-full lg:w-[300px] xl:w-[400px] border border-green-400 bg-white/20 backdrop-blur-sm text-black placeholder-gray-500"
+            className="input input-bordered w-full lg:w-[300px] xl:w-[400px] border border-green-500 bg-gray-800 text-white placeholder-gray-500 transition duration-200 ease-in-out focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-500"
           />
         </div>
-        <Link to="/about" className="px-2 hidden lg:inline-block hover:underline decoration-green-400">
+        <Link to="/about" className="px-4 hover:text-green-500 transition duration-200">
           About Us
         </Link>
-        <Link to="/contact" className="px-2 hidden lg:inline-block hover:underline decoration-green-400">
+        <Link to="/contact" className="px-4 hover:text-green-500 transition duration-200">
           Contact Us
         </Link>
       </div>
@@ -67,32 +69,35 @@ const Header = () => {
       {!authUser ? (
         <button
           onClick={() => document.getElementById("googleModal").showModal()}
-          className="btn bg-green-600 hover:bg-green-700 text-white text-sm md:text-base"
+          className="btn bg-green-600 hover:bg-green-700 text-white text-sm md:text-base transition duration-200"
         >
           Login
           <LogIn className="ml-1 md:ml-2 h-4 w-4 md:h-5 md:w-5" />
         </button>
       ) : (
         <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn m-1">
+          <div tabIndex={0} role="button" className="btn m-1 flex items-center">
             {authUser}
             <LogOut className="ml-1 md:ml-2 h-4 w-4 md:h-5 md:w-5" />
           </div>
           <ul
             tabIndex={0}
-            className="dropdown-content menu bg-base-100 rounded-md z-[1] w-52 p-2 shadow"
+            className="dropdown-content menu bg-gray-800 rounded-md z-[1] w-52 p-2 shadow-lg"
           >
             <li>
               <button
                 onClick={() =>
                   document.getElementById("confirmModal").showModal()
                 }
+                className="hover:text-red-500 transition duration-200"
               >
                 Logout
               </button>
             </li>
             <li>
-              <button onClick={openProfile}>Profile</button>
+              <button onClick={openProfile} className="hover:text-green-500 transition duration-200">
+                Profile
+              </button>
             </li>
           </ul>
         </div>

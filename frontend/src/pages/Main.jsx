@@ -5,6 +5,9 @@ import Roadmap from "../components/Roadmap";
 import { useAuth } from "../context/AuthProvider";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Spotlight from "../components/ui/Spotlight";
+import { HoverBorderGradient } from "../components/ui/hover-border-gradient";
+
 
 export const Main = () => {
   const { authUser } = useAuth(); // Get authUser from context
@@ -16,7 +19,7 @@ export const Main = () => {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 2000,
       });
-      console.log("User not logged in: Cannot access Report Issue"); // Debugging log
+      console.log("User not logged in: Cannot access Report Issue");
     } else {
       navigate("/select-category");
     }
@@ -28,65 +31,74 @@ export const Main = () => {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 2000,
       });
-      console.log("User not logged in: Cannot access Profile"); // Debugging log
+      console.log("User not logged in: Cannot access Profile");
     } else {
       navigate("/Profile");
     }
   }
 
   return (
-    <main>
+    <main className="relative bg-black-900 min-h-screen">
       {/* Toastify Notification */}
       <ToastContainer />
+      <div className="h-[50rem] w-full dark:bg-black bg-white  dark:bg-grid-white/[0.2] bg-grid-black/[0.2] relative flex items-center justify-center">
+      {/* Radial gradient for the container to give a faded look */}
+      <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+      {/* Spotlight effect */}
+      <Spotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="white" />
 
-      {/* main image */}
-      <div
-        className="hero h-96"
-        style={{
-          backgroundImage:
-            "url(https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp)",
-        }}
+      {/* Hero Section */}
+      <div className="hero relative flex items-center justify-center py-16 text-white">
+        <div className="text-center max-w-2xl z-10">
+          <h1 className="text-5xl font-bold mb-4 leading-snug">
+            <span className="block text-green-300">Report Today,</span>
+            See Change Tomorrow
+          </h1>
+          <p className="text-lg mb-6">
+            Report infrastructure issues, categorize them, and route them to the
+            appropriate department. Track real-time progress and contribute to faster
+            resolutions.
+          </p>
+          <HoverBorderGradient
+        containerClassName="rounded-full"
+        as="button"
+        className="dark:bg-black bg-white text-black dark:text-white flex items-center space-x-2"
       >
-        <div className="hero-overlay bg-opacity-60"></div>
-        <div className="hero-content text-neutral-content text-center">
-          <div className="max-w-md">
-            <h1 className="mb-5 text-5xl font-bold">
-              <span className="text-green-400">Report Today,</span> See Change
-              Tomorrow
-            </h1>
-            <p className="mb-2">
-              Report infrastructure issues, categorizes them and routes them to
-              the appropriate department. We offer real-time tracking, improving
-              transparency and accountability for faster resolution.
-            </p>
-          </div>
+            Report an Issue
+            </HoverBorderGradient>
         </div>
+        <div className="absolute inset-0 bg-opacity-60"></div>
+      </div>
       </div>
 
-      {/* sub category with increased margin */}
-      <section className="flex w-full justify-center gap-4 my-8 mx-8">
-        {/* Increased margins */}
-        <Section
-          image={
-            "https://img.icons8.com/?size=100&id=Mc0tQ0XMU2s_&format=png&color=000000"
-          }
-          text={"Report an Issue"}
-          openScreen={openCategory}
-        />
-        <Section
-          image={
-            "https://img.icons8.com/?size=100&id=24875&format=png&color=000000"
-          }
-          text={"Track Progress"}
-          openScreen={openProfile}
-        />
-        <Section
-          image={
-            "https://img.icons8.com/?size=100&id=7649&format=png&color=000000"
-          }
-          text={"Rewards and Leaderboard"}
-        />
-      </section>
+      <div className="bg-black flex items-center justify-center">
+  <section className="my-16 mx-auto max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-8 px-6">
+    <Section
+      image={
+        "https://img.icons8.com/?size=100&id=Mc0tQ0XMU2s_&format=png&color=009700"
+      }
+      text={"Report an Issue"}
+      openScreen={openCategory}
+      className="bg-gray-800 text-white rounded-lg shadow-lg p-6 flex flex-col items-center transition-transform transform hover:-translate-y-2"
+    />
+    <Section
+      image={
+        "https://img.icons8.com/?size=100&id=24875&format=png&color=009700"
+      }
+      text={"Track Progress"}
+      openScreen={openProfile}
+      className="bg-gray-800 text-white rounded-lg shadow-lg p-6 flex flex-col items-center transition-transform transform hover:-translate-y-2"
+    />
+    <Section
+      image={
+        "https://img.icons8.com/?size=100&id=7649&format=png&color=009700"
+      }
+      text={"Rewards and Leaderboard"}
+      className="bg-gray-800 text-white rounded-lg shadow-lg p-6 flex flex-col items-center transition-transform transform hover:-translate-y-2"
+    />
+  </section>
+</div>
+
 
       {/* Roadmap section */}
       <Roadmap />

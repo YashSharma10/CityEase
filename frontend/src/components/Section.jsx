@@ -23,7 +23,7 @@ const Section = ({ image, text, openScreen }) => {
       </figure>
       <div className="card-body items-center text-center">
         <div className="card-actions">
-          <button className="btn bg-green-400 text-white" onClick={openScreen}>
+          <button className="btn bg-green-500 text-white" onClick={openScreen}>
             {text}
           </button>
         </div>
