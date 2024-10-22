@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useAuth } from "../context/AuthProvider"; // Assuming you have an auth context
+import { useAuth } from "../context/AuthProvider"; 
 import { toast } from "react-toastify";
 
 const Profile = () => {
-  const { authUser } = useAuth(); // Get the logged-in user
+  const { authUser } = useAuth();
   const [userReports, setUserReports] = useState([]);
   const [loading, setLoading] = useState(true);
 
