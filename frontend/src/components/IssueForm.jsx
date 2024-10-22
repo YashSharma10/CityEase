@@ -108,10 +108,8 @@ const sectorData = {
     ],
     pincode: "122018",
   },
-
-// Add other sectors as needed...
+  // Add other sectors as needed...
 };
-
 
 const IssueForm = ({ categoryTitle, subCategoryTitle }) => {
   const { authUser } = useAuth();
@@ -211,116 +209,138 @@ const IssueForm = ({ categoryTitle, subCategoryTitle }) => {
     sectorData[formData.location]?.subLocations || [];
 
   return (
-    <div>
-      <ToastContainer />
-      <form
-        className="flex flex-col gap-2 bg-slate-50 py-5 px-10 rounded-md w-[700px]"
-        onSubmit={handleSubmit}
-        onReset={handleReset} // Reset form data when "Clear" is clicked
+    <div className="flex flex-col items-center">
+  <ToastContainer />
+  <form
+    className="bg-white shadow-lg rounded-lg p-8 w-full max-w-3xl" // Increased max width
+    onSubmit={handleSubmit}
+  >
+    <h1 className="text-2xl font-bold text-gray-700 mb-4 text-center">
+      Category: {categoryTitle}
+    </h1>
+
+    {/* Location (Sector) Dropdown */}
+    <label className="block mb-4">
+      <span className="text-gray-600 flex items-center gap-2">
+        <CiLocationOn />
+        Location (Sector)
+      </span>
+      <select
+        className="mt-1 block w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" // Increased padding for a cleaner look
+        name="location"
+        value={formData.location}
+        onChange={handleChange}
       >
-        <h1 className="text-2xl mb-2">Category: {categoryTitle}</h1>
+        <option value="" disabled>
+          Select Location (Sector)
+        </option>
+        {Object.keys(sectorData).map((sector, index) => (
+          <option key={index} value={sector}>
+            {sector}
+          </option>
+        ))}
+      </select>
+    </label>
 
-        {/* Location (Sector) Dropdown */}
-        <label className="input input-bordered flex items-center gap-2">
-          <CiLocationOn />
-          <select
-            className="grow"
-            name="location"
-            value={formData.location}
-            onChange={handleChange}
-          >
-            <option value="" disabled>
-              Select Location (Sector)
-            </option>
-            {Object.keys(sectorData).map((sector, index) => (
-              <option key={index} value={sector}>
-                {sector}
-              </option>
-            ))}
-          </select>
-        </label>
+    {/* Sub-Location Dropdown */}
+    <label className="block mb-4">
+      <span className="text-gray-600 flex items-center gap-2">
+        <CiLocationOn />
+        Sub-Location
+      </span>
+      <select
+        className="mt-1 block w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" // Increased padding for a cleaner look
+        name="subLocation"
+        value={formData.subLocation}
+        onChange={handleChange}
+        disabled={!formData.location}
+      >
+        <option value="" disabled>
+          Select Sub-Location
+        </option>
+        {availableSubLocations.map((subLoc, index) => (
+          <option key={index} value={subLoc}>
+            {subLoc}
+          </option>
+        ))}
+      </select>
+    </label>
 
-        {/* Sub-Location Dropdown */}
-        <label className="input input-bordered flex items-center gap-2">
-          <CiLocationOn />
-          <select
-            className="grow"
-            name="subLocation"
-            value={formData.subLocation}
-            onChange={handleChange}
-            disabled={!formData.location}
-          >
-            <option value="" disabled>
-              Select Sub-Location
-            </option>
-            {availableSubLocations.map((subLoc, index) => (
-              <option key={index} value={subLoc}>
-                {subLoc}
-              </option>
-            ))}
-          </select>
-        </label>
+    {/* Sub-Category Dropdown */}
+    <label className="block mb-4">
+      <span className="text-gray-600 flex items-center gap-2">
+        <BiCategory />
+        Sub-Category
+      </span>
+      <select
+        className="mt-1 block w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" // Increased padding for a cleaner look
+        name="subCategory"
+        value={formData.subCategory}
+        onChange={handleChange}
+      >
+        <option value="" disabled>
+          Select Sub-Category
+        </option>
+        {subCategoryTitle?.map((subCat, index) => (
+          <option key={index} value={subCat}>
+            {subCat}
+          </option>
+        ))}
+      </select>
+    </label>
 
-        {/* Sub-Category Dropdown */}
-        <label className="input input-bordered flex items-center gap-2">
-          <BiCategory />
-          <select
-            className="grow"
-            name="subCategory"
-            value={formData.subCategory}
-            onChange={handleChange}
-          >
-            <option value="" disabled>
-              Select Sub-Category
-            </option>
-            {subCategoryTitle?.map((subCat, index) => (
-              <option key={index} value={subCat}>
-                {subCat}
-              </option>
-            ))}
-          </select>
-        </label>
+    {/* Pincode Field (Auto-filled based on location) */}
+    <label className="block mb-4">
+      <span className="text-gray-600 flex items-center gap-2">
+        <TbMapPinCode />
+        Pincode
+      </span>
+      <input
+        type="text"
+        className="mt-1 block w-full p-3 border rounded-md bg-gray-100 cursor-not-allowed" // Increased padding for a cleaner look
+        placeholder="Pincode"
+        name="pincode"
+        value={formData.pincode}
+        readOnly
+      />
+    </label>
 
-        {/* Pincode Field (Auto-filled based on location) */}
-        <label className="input input-bordered flex items-center gap-2">
-          <TbMapPinCode />
-          <input
-            type="text"
-            className="grow"
-            placeholder="Pincode"
-            name="pincode"
-            value={formData.pincode}
-            readOnly
-          />
-        </label>
+    {/* Description Field */}
+    <label className="block mb-4">
+      <span className="text-gray-600">Description</span>
+      <textarea
+        className="mt-1 block w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" // Increased padding for a cleaner look
+        rows="4"
+        name="description"
+        value={formData.description}
+        onChange={handleChange}
+        required
+      />
+    </label>
 
-        {/* File Input */}
-        <input
-          type="file"
-          className="file-input file-input-bordered w-full"
-          onChange={handleFileChange}
-        />
+    {/* Image Upload */}
+    <label className="block mb-4">
+      <span className="text-gray-600">Upload Image</span>
+      <input
+        type="file"
+        className="mt-1 block w-full p-3 border rounded-md" // Increased padding for a cleaner look
+        accept="image/*"
+        onChange={handleFileChange}
+      />
+    </label>
 
-        {/* Description Textarea */}
-        <textarea
-          className="textarea textarea-bordered w-full"
-          placeholder="Description"
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-        ></textarea>
-
-        {/* Submit and Clear Buttons */}
-        <div className="flex justify-between">
-          <button type="reset" className="btn btn-outline btn-secondary">
-            Clear
-          </button>
-          <button type="submit" className="btn btn-outline btn-primary">
-            Submit
-          </button>
-        </div>
-      </form>
+    {/* Submit Button */}
+    <div className="flex justify-center">
+      <button
+        type="submit"
+        className="w-full bg-blue-600 text-white font-bold py-2 rounded-md hover:bg-blue-700 transition duration-200"
+      >
+        Submit
+      </button>
     </div>
+  </form>
+</div>
+
   );
 };
 
