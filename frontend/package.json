@@ -10,6 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/material": "^6.1.5",
+    "@mui/x-charts": "^7.21.0",
     "@react-three/drei": "^9.114.6",
     "@react-three/fiber": "^8.17.10",
     "@tabler/icons-react": "^3.19.0",
