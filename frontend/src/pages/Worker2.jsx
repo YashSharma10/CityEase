@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useAuth } from "../context/AuthProvider"; 
+import { useAuth } from "../context/AuthProvider";
 import { toast } from "react-toastify";
+import { PieChart } from "@mui/x-charts";
 
 const Profile = () => {
   const { authUser } = useAuth();
   const [userReports, setUserReports] = useState([]);
+  const [state, setState] = useState({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -28,6 +30,10 @@ const Profile = () => {
     }
   }, [authUser]);
 
+  let pendindData = userReports.filter(
+    (reportItem) => reportItem.status == "pending"
+  ).length;
+  let completedData = userReports.length - pendindData;
   if (loading) {
     return <div className="text-center">Loading...</div>;
   }
@@ -39,12 +45,35 @@ const Profile = () => {
 
   return (
     <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-4">Worker Profile</h1>
+      <div className="flex flex-1">
+        <PieChart
+          series={[
+            {
+              data: [
+                {
+                  id: 0,
+                  value: pendindData,
+                  label: "Pending",
+                },
+                {
+                  arcLabel: "10",
+                  id: 1,
+                  value: completedData,
+                  label: "Completed",
+                },
+              ],
+            },
+          ]}
+          width={400}
+          height={200}
+        />
 
-      {/* Display basic user information */}
-      <div className="bg-white p-4 shadow-md rounded-md mb-6">
-        <h2 className="text-xl font-semibold">Email: {authUser}</h2>
-        <p className="text-gray-600">Reports submitted by you:</p>
+        {/* Display basic user information */}
+        <div className="bg-white p-4 shadow-md rounded-md mb-6 flex-1">
+          <h1 className="text-3xl font-bold mb-4">Worker Profile</h1>
+          <h2 className="text-xl font-semibold">Email: {authUser}</h2>
+          <p className="text-gray-600">Reports submitted by you:</p>
+        </div>
       </div>
 
       {/* Display reports */}
@@ -59,19 +88,28 @@ const Profile = () => {
                 Category: {report.category}
               </h3>
               <p className="text-gray-700">Location: {report.location}</p>
-              <p className="text-gray-700">Sub-Location: {report.subLocation}</p>
-              <p className="text-gray-700">Sub-Category: {report.subCategory}</p>
-              <p className="text-gray-700">Pincode: {report.pincode}</p>
-              <p className="text-gray-700">Status: {report.status}</p>
-              <p className="text-gray-700">Priority: {report.priority}</p>
               <p className="text-gray-700">
-                Description: {report.description}
+                Sub-Location: {report.subLocation}
               </p>
+              <p className="text-gray-700">
+                Sub-Category: {report.subCategory}
+              </p>
+              {/* <p className="text-gray-700">Pincode: {report.pincode}</p> */}
+              <p className="text-gray-700">
+                Status:{" "}
+                {report.status == "pending" ? (
+                  <span className="text-red-400">Pending</span>
+                ) : (
+                  <span className="text-green-500">Completed</span>
+                )}
+              </p>
+              <p className="text-gray-700">Priority: {report.priority}</p>
+              <p className="text-gray-700">Description: {report.description}</p>
               {report.image && (
                 <img
                   src={report.image} // Make sure the image URL is correct
                   alt="Report"
-                  className="mt-2 w-full object-cover rounded-md"
+                  className="mt-2 w-[300px] h-[260px] object-fill rounded-md"
                 />
               )}
             </div>
