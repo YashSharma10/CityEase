@@ -33,6 +33,7 @@ router.post("/submit-report", upload.single("image"), async (req, res) => {
       subCategory,
       status: "pending",
     });
+    console.log(existingReport);
 
     if (existingReport) {
       existingReport.priority += 1;
@@ -68,34 +69,28 @@ router.post("/submit-report", upload.single("image"), async (req, res) => {
   }
 });
 
-// PUT route to update report status
-router.put("/reports/status", async (req, res) => {
+
+router.put("/reports/:id/status", async (req, res) => {
   try {
+    const reportId = req.params.id;
+    const { status } = req.body;
 
-    const { reportId } = req.body; // Get reportId from the request body
-    const report = await Report.findById(reportId); // Find the report by its ID
+    const updatedReport = await Report.findByIdAndUpdate(
+      reportId,
+      { status },
+      { new: true }
+    );
 
-    if (!report) {
+    if (!updatedReport) {
       return res.status(404).json({ message: "Report not found" });
     }
 
-    console.log("Received request to update status for:", req.body.reportId);
-    report.status = "resolved"; // Update status to 'resolved'
-    await report.save(); // Save the updated report
-
-    res
-      .status(200)
-      .json({
-        message: "Report status updated successfully",
-        updatedReport: report,
-      });
+    res.status(200).json({ message: "Report status updated successfully", updatedReport });
   } catch (error) {
     console.error("Error updating report status:", error);
-    res
-      .status(500)
-      .json({ message: "An error occurred while updating the report status." });
+    res.status(500).json({ message: "An error occurred while updating the report status." });
   }
-  console.log(reportId);
 });
+
 
 export default router;

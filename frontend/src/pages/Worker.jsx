@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "../context/AuthProvider";
 import { toast } from "react-toastify";
@@ -28,7 +28,12 @@ const Profile = () => {
 
   const handleMarkAsDone = async (reportId) => {
     try {
-      await axios.put("http://localhost:6005/reports/status", { reportId }); // Pass reportId in the request body
+      await axios.put(`http://localhost:6005/api/reports/${reportId}/status`, { status: "completed" });
+      setUserReports((prevReports) =>
+        prevReports.map((report) =>
+          report._id === reportId ? { ...report, status: "completed" } : report
+        )
+      );
       toast.success("Report marked as completed");
     } catch (error) {
       console.error("Error updating report status:", error);
@@ -69,7 +74,7 @@ const Profile = () => {
                 />
               )}
               <button
-                onClick={() => handleMarkAsDone(report._id)} // Pass report ID to the handler
+                onClick={() => handleMarkAsDone(report._id)}
                 className="mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
               >
                 Mark as Done
