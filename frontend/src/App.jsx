@@ -12,6 +12,7 @@ import ContactUs from "./pages/ContactUs";
 import Profile from "./pages/Profile";
 import Worker from "./pages/Worker";
 import Worker2 from "./pages/Worker2";
+import Doubt from "./pages/Doubt";
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
         <Route element={<ContactUs/>} path="/contact" />
         <Route element={<Profile/>} path="/profile" />
         <Route element={<Worker/>} path="/worker" />
+        <Route element={<Doubt/>} path="/doubt" />
         <Route element={<Worker2/>} path="/worker2" />
       </Routes>
       <Footer />

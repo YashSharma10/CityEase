@@ -56,6 +56,9 @@ const Header = () => {
             className="input input-bordered w-full lg:w-[300px] xl:w-[400px] border border-green-500 bg-gray-800 text-white placeholder-gray-500 transition duration-200 ease-in-out focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-500"
           />
         </div>
+        <Link to="/doubt" className="px-4 hover:text-green-500 transition duration-200">
+          ChatGPT
+        </Link>
         <Link to="/about" className="px-4 hover:text-green-500 transition duration-200">
           About Us
         </Link>
