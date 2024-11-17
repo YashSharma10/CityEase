@@ -6,6 +6,7 @@ function Chatbot({ open }) {
   const [chatMessages, setChatMessages] = useState([]);
   const [userInput, setUserInput] = useState("");
   const [model, setModel] = useState(open);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (model) {
@@ -16,7 +17,7 @@ function Chatbot({ open }) {
   useEffect(() => {
     // Initial chat greeting after 2 seconds
     const initialGreeting = setTimeout(() => {
-      displayMessage("ChatGPT", "Hello! How can I help you today?");
+      displayMessage("Helper", "Hello! How can I help you today?");
     }, 1000);
 
     return () => clearTimeout(initialGreeting);
@@ -24,17 +25,18 @@ function Chatbot({ open }) {
 
   async function sendMessage() {
     const userMessage = userInput.trim();
-
+    setLoading(true);
     if (userMessage !== "") {
       displayMessage("You", userMessage);
 
       try {
         const chatResponse = await chatWithGPT(userMessage);
-        displayMessage("ChatGPT", chatResponse);
+        if (chatResponse) setLoading(false);
+        displayMessage("Helper", chatResponse);
       } catch (error) {
         console.error("Error in chatWithGPT:", error);
         displayMessage(
-          "ChatGPT",
+          "Helper",
           "Sorry, there was an error processing your request."
         );
       }
@@ -47,20 +49,31 @@ function Chatbot({ open }) {
     try {
       // Make the API request with the correct API key (replace the key below)
       const response = await axios.post(
-        "https://api.openai.com/v1/engines/davinci-codex/completions",
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyCUDYfIwwcVXhEp7O32bVeEWKoajPq5E6o`,
         {
-          prompt: prompt,
-          max_tokens: 150,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer YOUR_API_KEY", // Replace with your actual OpenAI API key
-          },
+          contents: [
+            {
+              parts: [
+                {
+                  text: `your a professional helper now with given prompt give professional solution in not more then 100 word ${prompt}`,
+                },
+              ],
+            },
+          ],
         }
-      );
 
-      return response.data.choices[0].text.trim();
+        // {
+        //   prompt: prompt,
+        //   max_tokens: 150,
+        // },
+        // {
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //     Authorization: "Bearer YOUR_API_KEY", // Replace with your actual OpenAI API key
+        //   },
+        // }
+      );
+      return response.data.candidates[0].content.parts[0].text;
     } catch (error) {
       console.error("Error in chatWithGPT:", error);
       throw error;
@@ -110,10 +123,14 @@ function Chatbot({ open }) {
           onKeyPress={handleKeyPress}
         />
         <button
-          className="w-10 h-10 bg-blue-500 text-white rounded-full flex items-center justify-center hover:bg-blue-600"
+          className={`w-10 h-10 bg-blue-500 text-white rounded-full flex items-center justify-center hover:bg-blue-600`}
           onClick={sendMessage}
         >
-          <img src={sendIcon} alt="Send" className="w-5 h-5" />
+          {loading ? (
+            <span className="w-5 h-5 border-b-2 border-white border-solid rounded-full animate-spin"></span>
+          ) : (
+            <img src={sendIcon} alt="Send" className="w-5 h-5" />
+          )}
         </button>
       </div>
     </div>
