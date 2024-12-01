@@ -49,7 +49,7 @@ function Chatbot({ open }) {
     try {
       // Make the API request with the correct API key (replace the key below)
       const response = await axios.post(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyCUDYfIwwcVXhEp7O32bVeEWKoajPq5E6o`,
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyCL0FBwishgT_0nhRrakNUM6rkLoIhyEDY`,
         {
           contents: [
             {
